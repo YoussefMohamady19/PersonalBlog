@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PersonalBlog.Models.BlogPost>
+
+<h2>Blog Posts</h2>
+<div>
+    @foreach (var post in Model)
+    {
+        <div>
+            <h3>@post.Title</h3>
+            <p>
+                @if (post.Content.Length > 100)
+                {
+                    @post.Content.Substring(0, 100)
+               }
+                else
+                {
+                    @post.Content
+                }
+            </p>            <p>Category: @post.Category.Name</p>
+            <p><a href="@Url.Action("Details", "Blog", new { id = post.Id })">Read More</a></p>
+        </div>
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model PersonalBlog.Models.BlogPost
+
+<h2>@Model.Title</h2>
+<p>@Model.Content</p>
+<p>Category: @Model.Category.Name</p>
+<p>Published: @Model.PublishedDate.ToString("MMM dd, yyyy")</p>
+
+<h3>Comments</h3>
+@foreach (var comment in Model.Comments)
+{
+    <div>
+        <strong>@comment.Author</strong> <span>@comment.PostedDate.ToString("MMM dd, yyyy")</span>
+        <p>@comment.Content</p>
+    </div>
+}
+<br />
+<h3>Add a Comment</h3>
+<form asp-action="AddComment" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="author">Your Name</label>
+        <input type="text" class="form-control" id="author" name="author" required />
+    </div>
+
+    <div class="form-group">
+        <label for="content">Your Comment</label>
+        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
